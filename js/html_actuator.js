@@ -78,9 +78,12 @@ HTMLActuator.prototype.addTile = function (tile) {
     tile.mergedFrom.forEach(function (merged) {
       self.addTile(merged);
     });
+
+    document.getElementById("tileMergedSound").play();
   } else {
     classes.push("tile-new");
     this.applyClasses(wrapper, classes);
+    document.getElementById("newTile").play();
   }
 
   // Add the inner part of the tile to the wrapper
@@ -130,6 +133,12 @@ HTMLActuator.prototype.message = function (won) {
 
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;
+
+  if(won) {
+    document.getElementById("gameWonSound").play();
+  } else {
+    document.getElementById("gameOverSound").play();
+  }
 };
 
 HTMLActuator.prototype.clearMessage = function () {
